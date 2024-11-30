@@ -3,13 +3,29 @@ import { Button } from "./Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+function useDebounce(value, timeout){
+    const [debouncedValue, setDebouncedValue] = useState(value);
+
+    useEffect(()=>{
+        let timeoutReseter = setTimeout(()=>{
+            setDebouncedValue(value);
+        }, timeout);
+
+        return () => {
+            clearTimeout(timeoutReseter);
+        }
+    }, [value]);
+
+    return debouncedValue
+}
 
 export function Users (){
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState("");
+    const debouncedValue = useDebounce(filter, 500);
 
     useEffect(()=>{
-        axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter,{
+        axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + debouncedValue,{
             headers:{
                 Authorization: "Bearer " + localStorage.getItem("token")
             }
@@ -17,7 +33,7 @@ export function Users (){
             .then(response => {
                 setUsers(response.data.user);
             })
-    },[filter]);
+    },[debouncedValue]);
 
     return <>
         <div className="font-bold mt-6 text-lg">
