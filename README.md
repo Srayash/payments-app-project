@@ -1,5 +1,6 @@
 ## Setup
-- first add your mongodb connection string to mongoose.connect("<URL>") in backend/db.js
+- first add your mongodb connection string to in MONGO_URI in backend/.env
+- also add a JWT_SECRET to .env
 - open terminal change working directory to backend
 - start backend by typing node index.js
 - listening to backend on localhost:3000
