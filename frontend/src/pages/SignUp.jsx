@@ -40,7 +40,7 @@ export const SignUp = () => {
                     });
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("name", response.data.name);
-                    navigate("/dashboard");
+                    navigate("/");
                 }}/>
                 <BottomWarning label={"Already have an Account?"} hyperlink={"Sign in"} to={"/signin"}/>
             </div>

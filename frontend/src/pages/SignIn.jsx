@@ -30,7 +30,7 @@ export const SignIn = () => {
                     })
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("name", response.data.name);
-                    navigate("/dashboard");
+                    navigate("/");
 
                 }} />
                 <BottomWarning label={"Don't have an Account?"} hyperlink={"Sign Up"} to={"/signup"} />

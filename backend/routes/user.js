@@ -116,6 +116,27 @@ router.put("/", authMiddleware, async (req, res) => {
     });
 })
 
+router.get("/get-user", authMiddleware, async (req, res) => {
+    try {
+        const user = await User.findById(req.userId).select("-password");
+        if (!user) {
+            return res.status(403).json({ message: "User not found" });
+        }
+
+        res.json({
+            user: {
+                username: user.username,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                _id: user._id
+            }
+        });
+    } catch (err) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+
 router.get("/bulk", authMiddleware ,async (req, res) => {
     
     const filter = req.query.filter || ""; 
