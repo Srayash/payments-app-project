@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppBar } from "../components/AppBAr";
+import { AppBar } from "../components/AppBar";
 import { Balance } from "../components/Balance";
 import { Users } from "../components/Users";
 
